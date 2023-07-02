@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mipha/entry/check.dart';
 import 'package:mipha/entry/home.dart';
 import 'package:mipha/i18n/chat/localizations.dart';
 
@@ -26,9 +27,10 @@ class MiphaEntry extends StatelessWidget {
       theme: ThemeData(),
       darkTheme: ThemeData.dark(),
       routes: {
+        MiphaCheck.route: (context) => const MiphaCheck(),
         MiphaHome.route: (context) => const MiphaHome(),
       },
-      initialRoute: MiphaHome.route,
+      initialRoute: MiphaCheck.route,
     );
   }
 }
