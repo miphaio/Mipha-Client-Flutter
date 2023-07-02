@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../i18n/core/localizations.dart';
+import '../routes/chat/chat.dart';
 
 class MiphaHome extends StatefulWidget {
   static const String route = '/home';
@@ -32,8 +33,8 @@ class _MiphaHomeState extends State<MiphaHome> {
             label: coreLocalizations.getString('history'),
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.group),
-            label: coreLocalizations.getString('gather'),
+            icon: const Icon(Icons.chat),
+            label: coreLocalizations.getString('chat'),
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.brightness_2),
@@ -47,7 +48,14 @@ class _MiphaHomeState extends State<MiphaHome> {
   }
 
   Widget _buildBody() {
-    switch (_selectedIndex) {}
+    switch (_selectedIndex) {
+      case 0:
+        return Container();
+      case 1:
+        return const ChatView();
+      case 2:
+        return Container();
+    }
 
     return Container();
   }
