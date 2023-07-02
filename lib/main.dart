@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'app.dart';
+import 'entry/entry.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MiphaEntry());
 }
