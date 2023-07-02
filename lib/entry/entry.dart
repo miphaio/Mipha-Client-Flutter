@@ -24,7 +24,7 @@ class MiphaEntry extends StatelessWidget {
       theme: ThemeData(),
       darkTheme: ThemeData.dark(),
       routes: {
-        MiphaHome.route: (context) => MiphaHome(),
+        MiphaHome.route: (context) => const MiphaHome(),
       },
       initialRoute: MiphaHome.route,
     );
