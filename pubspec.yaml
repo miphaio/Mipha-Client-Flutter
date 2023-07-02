@@ -16,6 +16,8 @@ dependencies:
   logo: ^1.2.1
   bark: ^0.0.1
   numeric: ^2.0.0
+  web_socket_channel: ^2.4.0
+  dio: ^5.2.1+1
 
 dev_dependencies:
   flutter_test:
