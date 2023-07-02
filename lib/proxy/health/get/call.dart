@@ -1,19 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:mipha/util/log.dart';
 
-import '../../../client.dart';
+import '../../client.dart';
 import 'response.dart';
 
-Future<ChatRecordGetResponse> callChatRecordGet(
+Future<HealthGetResponse> callHealthGet(
   final Uri baseUri,
 ) async {
-  final Uri uri = baseUri.resolve("/chat/record");
+  final Uri uri = baseUri.resolve("/health/get");
 
   try {
     final Response rawResponse = await dio.getUri(uri);
 
-    final ChatRecordGetResponse response =
-        ChatRecordGetResponse.fromJson(rawResponse.data);
+    final HealthGetResponse response =
+        HealthGetResponse.fromJson(rawResponse.data);
 
     return response;
   } catch (e) {
