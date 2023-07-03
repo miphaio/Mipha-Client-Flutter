@@ -47,10 +47,8 @@ class _ChatViewState extends State<ChatView> {
       );
     }
 
-    return Center(
-      child: ChatViewList(
-        response: _chatRecordGetResponse!,
-      ),
+    return ChatViewList(
+      response: _chatRecordGetResponse!,
     );
   }
 

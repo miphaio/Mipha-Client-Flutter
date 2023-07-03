@@ -14,11 +14,13 @@ class ChatViewList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: response.records.map((ChatRecordGetResponseRecord record) {
-          return ChatViewItem(
-            record: record,
-          );
-        }).toList(),
+        children: response.records.map(
+          (ChatRecordGetResponseRecord record) {
+            return ChatViewItem(
+              record: record,
+            );
+          },
+        ).toList(),
       ),
     );
   }
