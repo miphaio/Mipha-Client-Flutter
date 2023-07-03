@@ -17,6 +17,7 @@ class ChatViewItem extends StatelessWidget {
     return Card(
       child: ListTile(
         title: Text(record.identifier),
+        subtitle: chatLocalizations.getText("key"),
         onTap: () {},
       ),
     );
