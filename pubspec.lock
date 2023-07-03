@@ -13,10 +13,10 @@ packages:
     dependency: "direct main"
     description:
       name: bark
-      sha256: "86870005dadf49bd649f9b6312916345dc9d62feaf4f19c81264f406fd56f0dc"
+      sha256: "81c9c60e404168dfc042dbaa5c4ab4c089ff58272a445d458e0a6b1eec0c5f39"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.1"
   basic_utils:
     dependency: transitive
     description:
