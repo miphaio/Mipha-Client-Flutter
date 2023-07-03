@@ -14,6 +14,55 @@ class ChatViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final ChatLocalizations chatLocalizations = ChatLocalizations.of(context);
 
-    return const Placeholder();
+    return Card(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 12.0,
+          ),
+          Container(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              top: 4.0,
+              bottom: 4.0,
+            ),
+            child: chatLocalizations.getText(
+              'from!1',
+              replaces: [
+                "",
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              top: 4.0,
+              bottom: 4.0,
+            ),
+            child: chatLocalizations.getText(
+              'to!1',
+              replaces: [
+                "",
+              ],
+            ),
+          ),
+          Container(
+            height: 12.0,
+          ),
+          const Divider(
+            height: 8.0,
+            thickness: 1.0,
+          ),
+          Container(
+            padding: const EdgeInsets.only(
+              left: 8.0,
+              right: 8.0,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
