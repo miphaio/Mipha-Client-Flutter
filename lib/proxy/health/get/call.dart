@@ -10,7 +10,7 @@ Future<HealthGetResponse> callHealthGet(
   final Uri uri = baseUri.resolve("/health/get");
 
   try {
-    final Response rawResponse = await dio.getUri(uri);
+    final Response rawResponse = await getDio().getUri(uri);
 
     final HealthGetResponse response =
         HealthGetResponse.fromJson(rawResponse.data);

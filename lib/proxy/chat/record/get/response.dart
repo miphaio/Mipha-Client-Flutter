@@ -33,7 +33,7 @@ class ChatRecordGetResponse {
 
   @override
   String toString() {
-    return 'ChatRecordGetResponse{$toJson()}';
+    return 'ChatRecordGetResponse{${toJson()}}';
   }
 }
 
@@ -52,7 +52,9 @@ class ChatRecordGetResponseRecord {
       final Map<String, dynamic> json) {
     return ChatRecordGetResponseRecord(
       identifier: json['identifier'],
-      updatedAt: DateTime.parse(json['updatedAt']),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(
+        json['updatedAt'],
+      ),
       version: json['version'],
     );
   }

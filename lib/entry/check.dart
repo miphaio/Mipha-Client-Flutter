@@ -1,6 +1,7 @@
 import 'package:bark/bark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:mipha/entry/home.dart';
 import 'package:mipha/util/authentication.dart';
 import 'package:mipha/util/log.dart';
 
@@ -30,7 +31,9 @@ class _MiphaCheckState extends State<MiphaCheck> {
           itemBuilder: (BuildContext context, int index) {
             return DecoratedBox(
               decoration: BoxDecoration(
-                color: index.isEven ? Colors.amber : Colors.green,
+                color: index.isEven
+                    ? Theme.of(context).colorScheme.background
+                    : Theme.of(context).primaryColor,
               ),
             );
           },
@@ -43,6 +46,24 @@ class _MiphaCheckState extends State<MiphaCheck> {
     final BarkAuthenticationToken? authenticationToken =
         await barkAuthentication.ensureAuthenticationToken();
 
-    logger.debug(authenticationToken);
+    if (authenticationToken == null) {
+      logger.info('Authentication failed');
+      return;
+    }
+
+    _navigateToIndexView();
+  }
+
+  void _navigateToIndexView() {
+    Navigator.of(context).pushAndRemoveUntil(
+      PageRouteBuilder(
+        pageBuilder: (BuildContext context, animation1, animation2) {
+          return const MiphaHome();
+        },
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+      ),
+      (Route<dynamic> route) => false,
+    );
   }
 }

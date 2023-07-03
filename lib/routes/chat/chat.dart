@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mipha/i18n/chat/localizations.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mipha/proxy/chat/record/get/call.dart';
 import 'package:mipha/proxy/chat/record/get/response.dart';
+import 'package:mipha/routes/chat/widgets/chat_list.dart';
 import 'package:mipha/util/log.dart';
 import 'package:mipha/util/uri.dart';
 
@@ -13,6 +14,9 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
+  bool _loading = true;
+  ChatRecordGetResponse? _chatRecordGetResponse;
+
   @override
   void initState() {
     super.initState();
@@ -21,11 +25,31 @@ class _ChatViewState extends State<ChatView> {
 
   @override
   Widget build(BuildContext context) {
-    final ChatLocalizations chatLocalizations = ChatLocalizations.of(context);
-
     return Scaffold(
-      body: Center(
-        child: chatLocalizations.getText("chat"),
+      body: _buildBody(context),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    if (_loading) {
+      return Center(
+        child: SpinKitPulsingGrid(
+          itemBuilder: (BuildContext context, int index) {
+            return DecoratedBox(
+              decoration: BoxDecoration(
+                color: index.isEven
+                    ? Theme.of(context).colorScheme.background
+                    : Theme.of(context).primaryColor,
+              ),
+            );
+          },
+        ),
+      );
+    }
+
+    return Center(
+      child: ChatViewList(
+        response: _chatRecordGetResponse!,
       ),
     );
   }
@@ -35,7 +59,11 @@ class _ChatViewState extends State<ChatView> {
 
     try {
       final ChatRecordGetResponse response = await callChatRecordGet(uri);
-      logger.debug(response);
+
+      setState(() {
+        _loading = false;
+        _chatRecordGetResponse = response;
+      });
     } catch (e) {
       logger.error(e);
     }
