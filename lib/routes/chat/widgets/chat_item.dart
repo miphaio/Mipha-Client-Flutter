@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mipha/i18n/chat/localizations.dart';
 import 'package:mipha/proxy/chat/record/outline/get/response.dart';
+import 'package:mipha/routes/record/record.dart';
 
 class ChatViewItem extends StatelessWidget {
   final ChatRecordOutlineGetResponseRecord record;
@@ -18,7 +19,17 @@ class ChatViewItem extends StatelessWidget {
       child: ListTile(
         title: Text(record.identifier),
         subtitle: chatLocalizations.getText("key"),
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return RecordView(
+                  chatRecordIdentifier: record.identifier,
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }
