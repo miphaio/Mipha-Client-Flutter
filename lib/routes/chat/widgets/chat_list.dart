@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mipha/proxy/chat/record/get/response.dart';
+import 'package:mipha/proxy/chat/record/outline/get/response.dart';
 import 'package:mipha/routes/chat/widgets/chat_item.dart';
 
 class ChatViewList extends StatelessWidget {
-  final ChatRecordGetResponse response;
+  final ChatRecordOutlineGetResponse response;
 
   const ChatViewList({
     required this.response,
@@ -15,7 +15,7 @@ class ChatViewList extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: response.records.map(
-          (ChatRecordGetResponseRecord record) {
+          (ChatRecordOutlineGetResponseRecord record) {
             return ChatViewItem(
               record: record,
             );

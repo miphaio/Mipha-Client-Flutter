@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mipha/i18n/chat/localizations.dart';
-import 'package:mipha/proxy/chat/record/get/response.dart';
+import 'package:mipha/proxy/chat/record/outline/get/response.dart';
 
 class ChatViewItem extends StatelessWidget {
-  final ChatRecordGetResponseRecord record;
+  final ChatRecordOutlineGetResponseRecord record;
 
   const ChatViewItem({
     required this.record,

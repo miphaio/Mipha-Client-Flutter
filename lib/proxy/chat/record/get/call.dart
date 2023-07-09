@@ -1,13 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:mipha/proxy/chat/record/get/response.dart';
+import 'package:mipha/proxy/client.dart';
 import 'package:mipha/util/log.dart';
-
-import '../../../client.dart';
-import 'response.dart';
 
 Future<ChatRecordGetResponse> callChatRecordGet(
   final Uri baseUri,
+  final String chatRecordIdentifier,
 ) async {
-  final Uri uri = baseUri.resolve("/chat/record?page=0");
+  final Uri uri = baseUri.resolve(
+    "/chat/record?identifier=$chatRecordIdentifier",
+  );
 
   try {
     final Response rawResponse = await getDio().getUri(uri);

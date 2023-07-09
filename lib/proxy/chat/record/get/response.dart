@@ -1,33 +1,23 @@
 class ChatRecordGetResponse {
-  final List<ChatRecordGetResponseRecord> records;
-  final int totalRecord;
-  final int totalPage;
-  final int currentPage;
+  final String chatRecordIdentifier;
+  final ChatRecordDataStructure record;
 
   ChatRecordGetResponse({
-    required this.records,
-    required this.totalRecord,
-    required this.totalPage,
-    required this.currentPage,
+    required this.chatRecordIdentifier,
+    required this.record,
   });
 
   factory ChatRecordGetResponse.fromJson(final Map<String, dynamic> json) {
     return ChatRecordGetResponse(
-      records: (json['records'] as List<dynamic>)
-          .map((e) => ChatRecordGetResponseRecord.fromJson(e))
-          .toList(),
-      totalRecord: json['totalRecord'],
-      totalPage: json['totalPage'],
-      currentPage: json['currentPage'],
+      chatRecordIdentifier: json['chatRecordIdentifier'],
+      record: ChatRecordDataStructure.fromJson(json['record']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'records': records.map((e) => e.toJson()).toList(),
-      'totalRecord': totalRecord,
-      'totalPage': totalPage,
-      'currentPage': currentPage,
+      'chatRecordIdentifier': chatRecordIdentifier,
+      'record': record.toJson(),
     };
   }
 
@@ -37,38 +27,58 @@ class ChatRecordGetResponse {
   }
 }
 
-class ChatRecordGetResponseRecord {
-  final String identifier;
-  final DateTime updatedAt;
-  final int version;
+class ChatRecordDataStructure {
+  final List<PromptElement> promptElements;
 
-  ChatRecordGetResponseRecord({
-    required this.identifier,
-    required this.updatedAt,
-    required this.version,
+  ChatRecordDataStructure({
+    required this.promptElements,
   });
 
-  factory ChatRecordGetResponseRecord.fromJson(
-      final Map<String, dynamic> json) {
-    return ChatRecordGetResponseRecord(
-      identifier: json['identifier'],
-      updatedAt: DateTime.fromMillisecondsSinceEpoch(
-        json['updatedAt'],
-      ),
-      version: json['version'],
+  factory ChatRecordDataStructure.fromJson(final Map<String, dynamic> json) {
+    return ChatRecordDataStructure(
+      promptElements: (json['promptElements'] as List<dynamic>)
+          .map((e) => PromptElement.fromJson(e))
+          .toList(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'identifier': identifier,
-      'updatedAt': updatedAt.toIso8601String(),
-      'version': version,
+      'promptElements': promptElements.map((e) => e.toJson()).toList(),
     };
   }
 
   @override
   String toString() {
-    return 'ChatRecordGetResponseRecord{$toJson()}';
+    return 'ChatRecordDataStructure{${toJson()}}';
+  }
+}
+
+class PromptElement {
+  final String role;
+  final String content;
+
+  PromptElement({
+    required this.role,
+    required this.content,
+  });
+
+  factory PromptElement.fromJson(final Map<String, dynamic> json) {
+    return PromptElement(
+      role: json['role'],
+      content: json['content'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'role': role,
+      'content': content,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'PromptElement{${toJson()}}';
   }
 }
