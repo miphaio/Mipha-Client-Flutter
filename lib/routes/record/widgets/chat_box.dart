@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mipha/i18n/chat/localizations.dart';
 
 class ChatRecordChatBox extends StatefulWidget {
+  final void Function(String message) onMessageSend;
+
   const ChatRecordChatBox({
+    required this.onMessageSend,
     super.key,
   });
 
@@ -11,6 +14,8 @@ class ChatRecordChatBox extends StatefulWidget {
 }
 
 class _ChatRecordChatBoxState extends State<ChatRecordChatBox> {
+  String _message = "";
+
   @override
   Widget build(BuildContext context) {
     final ChatLocalizations chatLocalizations = ChatLocalizations.of(context);
@@ -33,6 +38,14 @@ class _ChatRecordChatBoxState extends State<ChatRecordChatBox> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      onChanged: (String message) {
+                        setState(() {
+                          _message = message;
+                        });
+                      },
+                      onSubmitted: (String message) {
+                        widget.onMessageSend(message);
+                      },
                       decoration: InputDecoration(
                         hintText: chatLocalizations.getString("ask-anything"),
                         border: InputBorder.none,
@@ -43,7 +56,9 @@ class _ChatRecordChatBoxState extends State<ChatRecordChatBox> {
                     width: 15,
                   ),
                   FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.onMessageSend(_message);
+                    },
                     backgroundColor: theme.primaryColor,
                     elevation: 0,
                     child: const Icon(
