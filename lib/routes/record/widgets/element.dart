@@ -11,6 +11,8 @@ class ChatRecordLiveElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
     final bool isUser = element.role == "user";
 
     return Container(
@@ -24,13 +26,22 @@ class ChatRecordLiveElement extends StatelessWidget {
         alignment: (isUser ? Alignment.topLeft : Alignment.topRight),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: (isUser ? Colors.grey.shade200 : Colors.blue[200]),
+            borderRadius: BorderRadius.circular(
+              16,
+            ),
+            color: isUser
+                ? theme.colorScheme.secondaryContainer.withOpacity(0.5)
+                : theme.colorScheme.primaryContainer,
           ),
           padding: const EdgeInsets.all(16),
           child: Text(
             element.content,
-            style: const TextStyle(fontSize: 15),
+            style: TextStyle(
+              fontSize: 15,
+              color: isUser
+                  ? theme.colorScheme.shadow
+                  : theme.colorScheme.onPrimary,
+            ),
           ),
         ),
       ),
