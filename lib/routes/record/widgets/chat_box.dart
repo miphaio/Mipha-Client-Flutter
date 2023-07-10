@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mipha/i18n/chat/localizations.dart';
 
 class ChatRecordChatBox extends StatefulWidget {
   const ChatRecordChatBox({
@@ -12,6 +13,9 @@ class ChatRecordChatBox extends StatefulWidget {
 class _ChatRecordChatBoxState extends State<ChatRecordChatBox> {
   @override
   Widget build(BuildContext context) {
+    final ChatLocalizations chatLocalizations = ChatLocalizations.of(context);
+    final ThemeData theme = Theme.of(context);
+
     return SizedBox(
       height: 60,
       child: Stack(
@@ -19,37 +23,20 @@ class _ChatRecordChatBoxState extends State<ChatRecordChatBox> {
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(
-              padding: const EdgeInsets.only(left: 10, bottom: 10, top: 10),
-              height: 60,
+              padding: const EdgeInsets.only(
+                left: 10,
+                bottom: 10,
+                top: 10,
+              ),
               width: double.infinity,
-              color: Colors.white,
               child: Row(
                 children: <Widget>[
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                        color: Colors.lightBlue,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  const Expanded(
+                  Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: "Write message...",
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: InputBorder.none),
+                        hintText: chatLocalizations.getString("ask-anything"),
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -57,11 +44,10 @@ class _ChatRecordChatBoxState extends State<ChatRecordChatBox> {
                   ),
                   FloatingActionButton(
                     onPressed: () {},
-                    backgroundColor: Colors.blue,
+                    backgroundColor: theme.primaryColor,
                     elevation: 0,
                     child: const Icon(
                       Icons.send,
-                      color: Colors.white,
                       size: 18,
                     ),
                   ),
