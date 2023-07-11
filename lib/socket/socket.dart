@@ -13,6 +13,9 @@ class MiphaSocket {
   factory MiphaSocket.createChannel() {
     final WebSocketChannel channel = IOWebSocketChannel.connect(
       getMiphaSocketUri(),
+      headers: {
+        'Authorization': 'Bearer xxx.xxx.xxx',
+      },
     );
 
     channel.sink.add('Hello!');
