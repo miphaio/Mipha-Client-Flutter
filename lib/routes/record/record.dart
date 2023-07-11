@@ -4,6 +4,7 @@ import 'package:mipha/i18n/chat/localizations.dart';
 import 'package:mipha/proxy/chat/record/get/call.dart';
 import 'package:mipha/proxy/chat/record/get/response.dart';
 import 'package:mipha/routes/record/widgets/chat_record.dart';
+import 'package:mipha/socket/socket.dart';
 import 'package:mipha/util/log.dart';
 import 'package:mipha/util/uri.dart';
 
@@ -20,13 +21,13 @@ class RecordView extends StatefulWidget {
 }
 
 class _RecordViewState extends State<RecordView> {
+  final MiphaSocket _miphaSocket = MiphaSocket.createChannel();
+
   bool _loading = true;
-  ChatRecordGetResponse? _chatRecordGetResponse;
 
   @override
   void initState() {
     super.initState();
-    _fetchRecord();
   }
 
   @override
@@ -58,24 +59,6 @@ class _RecordViewState extends State<RecordView> {
       );
     }
 
-    return ChatRecordLive(
-      response: _chatRecordGetResponse!,
-    );
-  }
-
-  Future<void> _fetchRecord() async {
-    final Uri uri = getMiphaHTTPApiUri();
-
-    try {
-      final ChatRecordGetResponse response =
-          await callChatRecordGet(uri, widget.chatRecordIdentifier);
-
-      setState(() {
-        _chatRecordGetResponse = response;
-        _loading = false;
-      });
-    } catch (e) {
-      logger.error(e);
-    }
+    return Container();
   }
 }
