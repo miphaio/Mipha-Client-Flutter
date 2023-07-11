@@ -26,7 +26,7 @@ class _MiphaHomeState extends State<MiphaHome> {
       appBar: AppBar(
         title: coreLocalizations.getText("core"),
       ),
-      body: _buildBody(),
+      body: _buildBody(context),
       bottomNavigationBar: BottomNavigationBar(
         items: _buildNavigationBarItems(context),
         currentIndex: _selectedIndex,
@@ -65,7 +65,7 @@ class _MiphaHomeState extends State<MiphaHome> {
     return items;
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     switch (_selectedIndex) {
       case 0:
         return Container();
