@@ -1,4 +1,5 @@
 import 'package:mipha/util/log.dart';
+import 'package:mipha/util/uri.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -11,7 +12,7 @@ class MiphaSocket {
 
   factory MiphaSocket.createChannel() {
     final WebSocketChannel channel = IOWebSocketChannel.connect(
-      Uri.parse('ws://localhost:5000'),
+      getMiphaSocketUri(),
     );
 
     channel.sink.add('Hello!');
