@@ -16,7 +16,7 @@ class MiphaHome extends StatefulWidget {
 }
 
 class _MiphaHomeState extends State<MiphaHome> {
-  int _selectedIndex = 1;
+  int _selectedIndex = kDebugMode ? 3 : 1;
 
   @override
   Widget build(BuildContext context) {

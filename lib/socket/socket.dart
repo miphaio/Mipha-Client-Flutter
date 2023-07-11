@@ -11,14 +11,13 @@ class MiphaSocket {
 
   factory MiphaSocket.createChannel() {
     final WebSocketChannel channel = IOWebSocketChannel.connect(
-      Uri.parse('ws://localhost:5000'),
-      headers: {
-        "Authorization": "Bearer 1234567890",
-      },
+      Uri.parse('wss://ws.postman-echo.com/raw'),
     );
 
+    channel.sink.add('Hello!');
+
     channel.stream.listen((event) {
-      logger.info(event);
+      logger.info(event.toString());
     });
 
     return MiphaSocket(
