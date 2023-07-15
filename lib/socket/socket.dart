@@ -21,11 +21,8 @@ class MiphaSocket {
       },
     );
 
-    channel.sink.add('Hello!');
-
     channel.stream.listen((event) {
       logger.info(event.toString());
-      channel.sink.close();
     });
 
     return MiphaSocket(
