@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mipha/i18n/chat/localizations.dart';
-import 'package:mipha/proxy/chat/record/get/call.dart';
-import 'package:mipha/proxy/chat/record/get/response.dart';
-import 'package:mipha/routes/record/widgets/chat_record.dart';
 import 'package:mipha/socket/socket.dart';
-import 'package:mipha/util/log.dart';
-import 'package:mipha/util/uri.dart';
 
 class RecordView extends StatefulWidget {
   final String chatRecordIdentifier;
@@ -21,7 +16,7 @@ class RecordView extends StatefulWidget {
 }
 
 class _RecordViewState extends State<RecordView> {
-  final MiphaSocket _miphaSocket = MiphaSocket.createChannel();
+  // final MiphaSocket _miphaSocket = MiphaSocket.createChannel();
 
   bool _loading = true;
 
