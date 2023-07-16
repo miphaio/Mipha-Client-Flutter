@@ -5,11 +5,13 @@ import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class MiphaSocket {
-  WebSocketChannel? channel;
+  WebSocketChannel channel;
 
   MiphaSocket({
-    this.channel,
-  });
+    required this.channel,
+  }) {
+    channel.stream.listen(_onMessage);
+  }
 
   factory MiphaSocket.createChannel(
     BarkAuthenticationToken token,
@@ -21,12 +23,12 @@ class MiphaSocket {
       },
     );
 
-    channel.stream.listen((event) {
-      logger.info(event.toString());
-    });
-
     return MiphaSocket(
       channel: channel,
     );
+  }
+
+  void _onMessage(dynamic event) {
+    logger.info(event.toString());
   }
 }
