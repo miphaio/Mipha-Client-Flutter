@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:bark/bark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mipha/i18n/chat/localizations.dart';
-import 'package:mipha/socket/event/event.dart';
 import 'package:mipha/socket/event/event_type.dart';
+import 'package:mipha/socket/event/payload/chat_record.dart';
 import 'package:mipha/socket/socket.dart';
 import 'package:mipha/util/authentication.dart';
 import 'package:mipha/util/log.dart';
@@ -86,21 +88,22 @@ class _RecordViewState extends State<RecordView> {
 
     _miphaSocket!.addEventListener(
       WebsocketEventType.chatRecord,
-      (WebsocketEvent event) {
+      (WebsocketChatRecordEvent event) {
         logger.info(event);
+        logger.info(event.chatRecord);
       },
     );
 
     await _miphaSocket!.channel.ready;
 
-    _miphaSocket!.channel.sink.add({
+    logger.info("Connection Ready");
+
+    _miphaSocket!.channel.sink.add(jsonEncode({
       "action": "chat-record",
       "payload": {
-        "chatRecordIdentifier": "cd483131-e4d9-403c-838c-679e49685f8b",
+        "chatRecordIdentifier": widget.chatRecordIdentifier,
       }
-    });
-
-    logger.info("Connection Ready");
+    }));
 
     setState(() {
       _loading = false;
