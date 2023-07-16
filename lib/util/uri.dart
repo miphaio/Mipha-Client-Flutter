@@ -8,5 +8,5 @@ Uri getMiphaHTTPApiUri() {
 }
 
 Uri getMiphaSocketUri() {
-  return Uri.parse("wss://prod.websocket.api.core.mipha.io/prod");
+  return Uri.parse("wss://prod.websocket.api.core.mipha.io");
 }

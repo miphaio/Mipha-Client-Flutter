@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:bark/bark.dart';
-import 'package:mipha/util/log.dart';
+import 'package:mipha/socket/event/event.dart';
+import 'package:mipha/socket/event/parse.dart';
 import 'package:mipha/util/uri.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -29,6 +32,7 @@ class MiphaSocket {
   }
 
   void _onMessage(dynamic event) {
-    logger.info(event.toString());
+    final dynamic json = jsonDecode(event.toString());
+    final WebsocketEvent websocketEvent = parseWebsocketEvent(json);
   }
 }

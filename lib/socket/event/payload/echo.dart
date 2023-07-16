@@ -3,7 +3,7 @@ import 'package:mipha/socket/event/event_target.dart';
 import 'package:mipha/socket/event/event_type.dart';
 
 class WebsocketEchoEvent extends WebsocketEvent {
-  final String content;
+  final dynamic content;
 
   WebsocketEchoEvent({
     required this.content,

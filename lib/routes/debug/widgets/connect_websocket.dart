@@ -43,7 +43,7 @@ class DebugCenterConnectWebsocket extends StatelessWidget {
                 return;
               }
 
-              _miphaSocket!.channel!.sink.add(
+              _miphaSocket!.channel.sink.add(
                 jsonEncode(
                   {
                     "hello": "world",
@@ -62,7 +62,7 @@ class DebugCenterConnectWebsocket extends StatelessWidget {
                 return;
               }
 
-              _miphaSocket!.channel!.sink.close();
+              _miphaSocket!.channel.sink.close();
               _miphaSocket = null;
 
               logger.info("Socket Closed");

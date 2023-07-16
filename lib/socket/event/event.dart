@@ -9,4 +9,16 @@ class WebsocketEvent {
     required this.eventType,
     required this.eventTarget,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'type': eventType.toString(),
+      'target': eventTarget.toJson(),
+    };
+  }
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
 }

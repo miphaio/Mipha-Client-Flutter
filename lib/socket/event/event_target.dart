@@ -33,4 +33,13 @@ class WebsocketEventTarget {
       content: chatRecordIdentifier,
     );
   }
+
+  String toJson() {
+    return '{"type": "$type", "content": "$content"}';
+  }
+
+  @override
+  String toString() {
+    return toJson();
+  }
 }
