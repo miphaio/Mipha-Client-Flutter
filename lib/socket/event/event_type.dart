@@ -24,7 +24,9 @@ enum WebsocketEventType implements Comparable<WebsocketEventType> {
   final String eventName;
 
   @override
-  int compareTo(WebsocketEventType other) => eventName.compareTo(
-        other.eventName,
-      );
+  int compareTo(WebsocketEventType other) {
+    return eventName.compareTo(
+      other.eventName,
+    );
+  }
 }
