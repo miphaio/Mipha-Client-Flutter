@@ -6,10 +6,9 @@ class WebsocketErrorEvent extends WebsocketEvent {
   final String message;
 
   WebsocketErrorEvent({
-    required WebsocketEventTarget target,
     required this.message,
   }) : super(
           eventType: WebsocketEventType.error,
-          eventTarget: target,
+          eventTarget: WebsocketEventTarget.fromVoid(),
         );
 }

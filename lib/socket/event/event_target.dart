@@ -16,15 +16,21 @@ class WebsocketEventTarget {
     );
   }
 
-  factory WebsocketEventTarget.fromString(
-    String type,
-    String content,
+  factory WebsocketEventTarget.fromConnection(
+    String connectionId,
   ) {
     return WebsocketEventTarget(
-      type: WebsocketEventTargetType.fromString(
-        type,
-      ),
-      content: content,
+      type: WebsocketEventTargetType.connection,
+      content: connectionId,
+    );
+  }
+
+  factory WebsocketEventTarget.fromChatRecord(
+    String chatRecordIdentifier,
+  ) {
+    return WebsocketEventTarget(
+      type: WebsocketEventTargetType.chatRecord,
+      content: chatRecordIdentifier,
     );
   }
 }

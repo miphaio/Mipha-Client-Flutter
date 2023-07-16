@@ -4,11 +4,11 @@ import 'package:mipha/socket/event/event_target.dart';
 import 'package:mipha/socket/event/event_type.dart';
 
 class WebsocketChatRecordEvent extends WebsocketEvent {
-  final ChatRecordDataStructure chatRecordDataStructure;
+  final ChatRecordDataStructure chatRecord;
 
   WebsocketChatRecordEvent({
     required WebsocketEventTarget target,
-    required this.chatRecordDataStructure,
+    required this.chatRecord,
   }) : super(
           eventType: WebsocketEventType.chatRecord,
           eventTarget: target,

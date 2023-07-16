@@ -6,10 +6,9 @@ class WebsocketEchoEvent extends WebsocketEvent {
   final String content;
 
   WebsocketEchoEvent({
-    required WebsocketEventTarget target,
     required this.content,
   }) : super(
           eventType: WebsocketEventType.echo,
-          eventTarget: target,
+          eventTarget: WebsocketEventTarget.fromVoid(),
         );
 }
