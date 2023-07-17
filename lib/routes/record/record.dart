@@ -1,20 +1,22 @@
 import 'dart:convert';
 
-import 'package:bark/bark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mipha/i18n/chat/localizations.dart';
+import 'package:mipha/proxy/chat/record/get/response.dart';
+import 'package:mipha/routes/record/widgets/chat_record.dart';
 import 'package:mipha/socket/event/event_type.dart';
 import 'package:mipha/socket/event/payload/chat_record.dart';
 import 'package:mipha/socket/socket.dart';
-import 'package:mipha/util/authentication.dart';
 import 'package:mipha/util/log.dart';
 
 class RecordView extends StatefulWidget {
   final String chatRecordIdentifier;
+  final MiphaSocket miphaSocket;
 
   const RecordView({
     required this.chatRecordIdentifier,
+    required this.miphaSocket,
     super.key,
   });
 
@@ -23,20 +25,28 @@ class RecordView extends StatefulWidget {
 }
 
 class _RecordViewState extends State<RecordView> {
-  MiphaSocket? _miphaSocket;
-
-  bool _loading = true;
+  ChatRecordDataStructure? _chatRecord;
 
   @override
   void initState() {
     super.initState();
-    _establishConnection();
+
+    widget.miphaSocket.addEventListener(
+      WebsocketEventType.chatRecord,
+      _chatRecordListener,
+    );
+
+    _requestForChatRecord();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _miphaSocket?.channel.sink.close();
+
+    widget.miphaSocket.removeEventListener(
+      WebsocketEventType.chatRecord,
+      _chatRecordListener,
+    );
   }
 
   @override
@@ -52,7 +62,7 @@ class _RecordViewState extends State<RecordView> {
   }
 
   Widget _buildBody(BuildContext context) {
-    if (_loading) {
+    if (_chatRecord == null) {
       return Center(
         child: SpinKitPulsingGrid(
           itemBuilder: (BuildContext context, int index) {
@@ -68,45 +78,30 @@ class _RecordViewState extends State<RecordView> {
       );
     }
 
-    return Container();
+    return ChatRecordLive(
+      record: _chatRecord!,
+    );
   }
 
-  Future<void> _establishConnection() async {
-    final BarkAuthenticationToken? token =
-        await barkAuthentication.ensureAuthenticationToken();
-
-    if (token == null) {
-      logger.warning("No token");
-      return;
-    }
-
-    _miphaSocket = MiphaSocket.createChannel(token);
-
-    _miphaSocket!.addEventListener(WebsocketEventType.connect, () {
-      logger.info("Connected");
-    });
-
-    _miphaSocket!.addEventListener(
-      WebsocketEventType.chatRecord,
-      (WebsocketChatRecordEvent event) {
-        logger.info(event);
-        logger.info(event.chatRecord);
-      },
-    );
-
-    await _miphaSocket!.channel.ready;
-
-    logger.info("Connection Ready");
-
-    _miphaSocket!.channel.sink.add(jsonEncode({
-      "action": "chat-record",
-      "payload": {
-        "chatRecordIdentifier": widget.chatRecordIdentifier,
-      }
-    }));
+  void _chatRecordListener(WebsocketChatRecordEvent event) {
+    logger.info(event);
+    logger.info(event.chatRecord);
 
     setState(() {
-      _loading = false;
+      _chatRecord = event.chatRecord;
     });
+  }
+
+  void _requestForChatRecord() {
+    widget.miphaSocket.channel.sink.add(
+      jsonEncode(
+        {
+          "action": "chat-record",
+          "payload": {
+            "chatRecordIdentifier": widget.chatRecordIdentifier,
+          },
+        },
+      ),
+    );
   }
 }
