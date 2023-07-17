@@ -19,7 +19,6 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
-  bool _chatRecordLoading = true;
   ChatRecordOutlineGetResponse? _chatRecordGetResponse;
 
   bool _socketLoading = true;
@@ -46,7 +45,7 @@ class _ChatViewState extends State<ChatView> {
   }
 
   Widget _buildBody(BuildContext context) {
-    if (_chatRecordLoading && _socketLoading) {
+    if (_chatRecordGetResponse == null || _socketLoading) {
       return Center(
         child: SpinKitPulsingGrid(
           itemBuilder: (BuildContext context, int index) {
@@ -76,7 +75,6 @@ class _ChatViewState extends State<ChatView> {
           await callChatRecordOutlineGet(uri);
 
       setState(() {
-        _chatRecordLoading = false;
         _chatRecordGetResponse = response;
       });
     } catch (e) {

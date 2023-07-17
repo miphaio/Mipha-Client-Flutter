@@ -20,8 +20,10 @@ class ChatViewItem extends StatelessWidget {
 
     return Card(
       child: ListTile(
-        title: Text(record.identifier),
-        subtitle: chatLocalizations.getText("key"),
+        title: Text(
+          record.summary ?? chatLocalizations.getString("noSummary"),
+        ),
+        subtitle: Text(record.updatedAt.toString()),
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
