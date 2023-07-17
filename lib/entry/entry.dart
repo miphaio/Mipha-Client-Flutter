@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:localizations_date/localizations_date.dart';
 import 'package:mipha/entry/check.dart';
 import 'package:mipha/entry/home.dart';
 import 'package:mipha/i18n/chat/localizations.dart';
@@ -14,9 +15,12 @@ class MiphaEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: true,
+      debugShowMaterialGrid: false,
       localizationsDelegates: [
         ChatLocalizations.delegate,
         CoreLocalizations.delegate,
+        GlobalDateLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],

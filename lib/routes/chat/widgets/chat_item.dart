@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localizations_date/localizations_date.dart';
 import 'package:mipha/i18n/chat/localizations.dart';
 import 'package:mipha/proxy/chat/record/outline/get/response.dart';
 import 'package:mipha/routes/record/record.dart';
@@ -17,13 +18,19 @@ class ChatViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChatLocalizations chatLocalizations = ChatLocalizations.of(context);
+    final GlobalDateLocalizations dateLocalizations =
+        GlobalDateLocalizations.of(context);
 
     return Card(
       child: ListTile(
         title: Text(
           record.summary ?? chatLocalizations.getString("noSummary"),
         ),
-        subtitle: Text(record.updatedAt.toString()),
+        subtitle: Text(
+          dateLocalizations.relativeFormatDate(
+            record.updatedAt,
+          ),
+        ),
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
