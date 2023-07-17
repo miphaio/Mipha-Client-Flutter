@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:mipha/i18n/chat/localizations.dart';
 import 'package:mipha/proxy/chat/record/outline/get/response.dart';
 import 'package:mipha/routes/record/record.dart';
+import 'package:mipha/socket/socket.dart';
 
 class ChatViewItem extends StatelessWidget {
   final ChatRecordOutlineGetResponseRecord record;
+  final MiphaSocket miphaSocket;
 
   const ChatViewItem({
     required this.record,
+    required this.miphaSocket,
     super.key,
   });
 
@@ -25,6 +28,7 @@ class ChatViewItem extends StatelessWidget {
               builder: (BuildContext context) {
                 return RecordView(
                   chatRecordIdentifier: record.identifier,
+                  miphaSocket: miphaSocket,
                 );
               },
             ),

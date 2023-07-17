@@ -64,6 +64,7 @@ class _ChatViewState extends State<ChatView> {
 
     return ChatViewList(
       response: _chatRecordGetResponse!,
+      miphaSocket: _miphaSocket!,
     );
   }
 
